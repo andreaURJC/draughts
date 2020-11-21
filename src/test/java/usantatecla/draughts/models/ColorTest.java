@@ -6,6 +6,7 @@ import org.junit.Test;
 public class ColorTest {
     Color white = Color.WHITE;
     Color black = Color.BLACK;
+    Color nullColor = Color.NULL;
 
     @Test
     public void testIsInitialRow() {
@@ -25,14 +26,14 @@ public class ColorTest {
 
     @Test
     public void testGetInitialColorWhenCoordinateIsWhiteShouldReturnNull() {
-        Assert.assertNull(Color.getInitialColor(coordinate(0, 0)));
-        Assert.assertNull(Color.getInitialColor(coordinate(2, 2)));
+        Assert.assertEquals(this.nullColor ,Color.getInitialColor(coordinate(0, 0)));
+        Assert.assertEquals(this.nullColor, Color.getInitialColor(coordinate(2, 2)));
     }
 
     @Test
     public void testGetInitialColorWhenCoordinateDoesntHavePieceShouldReturnNull() {
-        Assert.assertNull(Color.getInitialColor(coordinate(3, 3)));
-        Assert.assertNull(Color.getInitialColor(coordinate(4, 4)));
+        Assert.assertEquals(this.nullColor, Color.getInitialColor(coordinate(3, 3)));
+        Assert.assertEquals(this.nullColor, Color.getInitialColor(coordinate(4, 4)));
     }
 
     private static Coordinate coordinate(int row, int column) {
