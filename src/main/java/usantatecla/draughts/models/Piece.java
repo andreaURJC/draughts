@@ -8,7 +8,7 @@ public abstract class Piece {
 	private static String[] CODES = {"b", "n"};
 
 	Piece(Color color) {
-		assert color != null;
+		assert !color.isNull();
 		this.color = color;
 	}
 
@@ -58,7 +58,7 @@ public abstract class Piece {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((color == null) ? 0 : color.hashCode());
+		result = prime * result + ((color.isNull()) ? 0 : color.hashCode());
 		return result;
 	}
 
