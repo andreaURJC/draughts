@@ -33,19 +33,19 @@ public class Game {
 	}
 
 	public Error move(Coordinate... coordinates) {
-		Error error = null;
+		Error error = Error.NULL;
 		List<Coordinate> removedCoordinates = new ArrayList<Coordinate>();
 		List<Piece> removedPieces = new ArrayList<Piece>();
 		int pair = 0;
 		do {
 			error = this.isCorrectPairMove(pair, coordinates);
-			if (error == null) {
+			if (error.isNull()) {
 				this.pairMove(removedCoordinates, removedPieces, pair, coordinates);
 				pair++;
 			}
-		} while (pair < coordinates.length - 1 && error == null);
+		} while (pair < coordinates.length - 1 && error.isNull());
 		error = this.isCorrectGlobalMove(error, removedCoordinates, coordinates);
-		if (error == null)
+		if (error.isNull())
 			this.turn.change();
 		else
 			this.unMovesUntilPair(removedCoordinates, removedPieces, pair, coordinates);
@@ -95,11 +95,11 @@ public class Game {
 	}
 
 	private Error isCorrectGlobalMove(Error error, List<Coordinate> removedCoordinates, Coordinate... coordinates){
-		if (error != null)
+		if (!error.isNull())
 			return error;
 		if (coordinates.length > 2 && coordinates.length > removedCoordinates.size() + 1)
 			return Error.TOO_MUCH_JUMPS;
-		return null;
+		return Error.NULL;
 	}
 
 	private void unMovesUntilPair(List<Coordinate> removedCoordinates, List<Piece> removedPieces, int pair, Coordinate... coordinates) {
