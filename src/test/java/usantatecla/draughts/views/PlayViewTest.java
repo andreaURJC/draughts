@@ -7,6 +7,7 @@ import org.mockito.Mock;
 import usantatecla.draughts.controllers.PlayController;
 import usantatecla.draughts.models.Color;
 import usantatecla.draughts.utils.Console;
+import usantatecla.draughts.models.Error;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -44,6 +45,7 @@ public class PlayViewTest {
     @Test
     public void testWhenIntroducingWrongFormatCoordinateThenAskAgain() {
         doReturn("xxx", "12.23").when(console).readString(any());
+        when(playController.move(any())).thenReturn(Error.NULL);
         playView.interact(playController);
         verify(console, times(2)).readString(any());
     }
@@ -52,6 +54,7 @@ public class PlayViewTest {
     public void testWhenIntroducingValidCoordinateAndBlockedThenLoose() {
         doReturn("12.23").when(console).readString(any());
         doReturn(true).when(playController).isBlocked();
+        when(playController.move(any())).thenReturn(Error.NULL);
         playView.interact(playController);
         verify(console, times(1)).writeln(LOST_MESSAGE);
     }
