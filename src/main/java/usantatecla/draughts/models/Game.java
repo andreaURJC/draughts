@@ -135,7 +135,7 @@ public class Game {
 	private boolean isBlocked(Coordinate coordinate) {
 		for (int i = 1; i <= 2; i++)
 			for (Coordinate target : coordinate.getDiagonalCoordinates(i))
-				if (this.isCorrectPairMove(0, coordinate, target) == null)
+				if (this.isCorrectPairMove(0, coordinate, target).isNull())
 					return false;
 		return true;
 	}
