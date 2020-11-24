@@ -20,7 +20,7 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
 public class GameViewTest {
-    private GameView gameView;
+    private View gameView;
     private final int DIMENSION = 5;
     private final Color black = Color.BLACK;
     private final Color white = Color.WHITE;
@@ -33,7 +33,7 @@ public class GameViewTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         System.setOut(new PrintStream(outContent));
-        this.gameView = new GameView();
+        this.gameView = new View();
     }
 
     @Test

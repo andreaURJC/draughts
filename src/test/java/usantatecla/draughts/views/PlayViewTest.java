@@ -19,7 +19,7 @@ public class PlayViewTest {
     private static final String LOST_MESSAGE = "Derrota!!! No puedes mover tus fichas!!!";
 
     @InjectMocks
-    PlayView playView;
+    View playView;
 
     @Mock
     Console console;
@@ -38,7 +38,7 @@ public class PlayViewTest {
         //TODO: Preguntar por qué con el @Spy de console no funciona el when().thenReturn()
         doReturn(CANCEL_FORMAT).when(console).readString(any());
         //when(console.readString(anyString())).thenReturn(CANCEL_FORMAT);
-        playView.interact(playController);
+        playView.visit(playController);
         verify(playController, times(1)).cancel();
     }
 
@@ -46,7 +46,7 @@ public class PlayViewTest {
     public void testWhenIntroducingWrongFormatCoordinateThenAskAgain() {
         doReturn("xxx", "12.23").when(console).readString(any());
         when(playController.move(any())).thenReturn(Error.NULL);
-        playView.interact(playController);
+        playView.visit(playController);
         verify(console, times(2)).readString(any());
     }
 
@@ -55,7 +55,7 @@ public class PlayViewTest {
         doReturn("12.23").when(console).readString(any());
         doReturn(true).when(playController).isBlocked();
         when(playController.move(any())).thenReturn(Error.NULL);
-        playView.interact(playController);
+        playView.visit(playController);
         verify(console, times(1)).writeln(LOST_MESSAGE);
     }
 }

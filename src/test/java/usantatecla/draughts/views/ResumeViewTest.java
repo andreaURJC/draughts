@@ -14,7 +14,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
 public class ResumeViewTest {
 
 	@InjectMocks
-	ResumeView resumeView = new ResumeView();
+	View resumeView = new View();
 
 	@Mock
 	ResumeController resumeController;
@@ -30,14 +30,14 @@ public class ResumeViewTest {
 	@Test
 	public void testGivenResumeQuestionOnYesThenResetState() {
 		when(this.yesNoDialog.read(anyString())).thenReturn(true);
-		this.resumeView.interact(resumeController);
+		this.resumeView.visit(resumeController);
 		verify(resumeController, times(1)).reset();
 	}
 	
 	@Test
 	public void testGivenResumeQuestionOnNoThenStateFinal() {
 		when(this.yesNoDialog.read(anyString())).thenReturn(false);
-		this.resumeView.interact(resumeController);
+		this.resumeView.visit(resumeController);
 		verify(resumeController, times(1)).next();
 	}
 }

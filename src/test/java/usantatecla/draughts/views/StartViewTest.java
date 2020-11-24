@@ -26,7 +26,7 @@ public class StartViewTest {
     private Console console;
 
     @InjectMocks
-    private final StartView startView = new StartView();
+    private final View startView = new View();
 
     @Before
     public void before() {
@@ -41,20 +41,20 @@ public class StartViewTest {
 
     @Test
     public void testInteractShouldBeCalledOnce() {
-        this.startView.interact(this.startController);
+        this.startView.visit(this.startController);
         verify(startController, times(1)).start();
         verify(startController, atMost(1)).start();
     }
 
     @Test
     public void testInteractConsoleShouldWriteTitle() {
-        this.startView.interact(this.startController);
+        this.startView.visit(this.startController);
         verify(this.console, times(1)).writeln(anyString());
     }
 
     @Test
     public void testInteractConsoleShouldPrintTitle() {
-        startView.interact(this.startController);
+        startView.visit(this.startController);
         Assert.assertTrue(outContent.toString().contains("Draughts"));
     }
 }
